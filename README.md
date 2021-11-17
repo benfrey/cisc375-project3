@@ -1,6 +1,13 @@
-# cisc375-project3
-Project 3 - RESTful Server
+# RESTful Server - CISC375: Web Development Project #3
 
+1. $git clone https://github.com/<user>/<project>
+2. $cd <project>
+3. Copy my local version of 'stpaul_crime.sqlite3' to the 'db' folder
+4. $npm install
+5. $node server.js
+6. Perform GET, PUT, DELETE requests using curl
+
+# Project components
 Implement the following to earn 30/40 points (grade: C)
 - Package.json
     - Fill out the author and contributors sections in package.json (author should be whoever's GitHub account is used to host the code, contributors should be all group members)
