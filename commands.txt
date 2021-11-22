@@ -1,0 +1,16 @@
+Curl -X POST -d '{"id": "N", "name": "New Brand"}' -H 'Content-Type: application/json' http://localhost:8000/api/mfr
+
+curl -d '{"id": "N", "name": "New Brand"}' -H 'Content-Type: application/json' -X POST http://localhost:8000/data
+
+Commands challenges:
+1. GET /codes => list of codes in numeric order along with incident type (see assignment for format)
+2. GET /api/cereal/:mfr => list of cereal for specific mfr
+3. POST /api/mfr => add new manufacturer (data -> mfr id, mfr name)
+4. POST /api/cereal => add new cereal (data -> ...?)
+
+Commands to run:
+1. curl -d -H 'Content-Type: application/json' -X GET http://localhost:3000/api/mfr
+2. curl -d -H 'Content-Type: application/json' -X GET http://localhost:3000/api/cereal/Kelloggs
+3 (correct). curl -d '{"id": "C", "name": "CISC Cereal"}' -H 'Content-Type: application/json' -X POST http://localhost:3000/api/mfr
+3 (error). curl -d '{"id": "K", "name": "CISC Cereal"}' -H 'Content-Type: application/json' -X POST http://localhost:3000/api/mfr   // Throws error because cereal with ID 'K' is already inserted.
+4. 
