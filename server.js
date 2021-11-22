@@ -37,9 +37,37 @@ app.get('/', (req, res) => {
 // Get /codes
 app.get('/codes', (req, res) => {
   db.all('SELECT * FROM Codes ORDER BY code', (err, rows) => {
-    res.status(200).type('json').send(rows);
+    res.status(200).type('json').send(rows); // Still need newline after each row
   });
 });
+
+// Get /neighborhoods
+app.get('/neighborhoods', (req, res) => {
+  db.all('SELECT * FROM Neighborhoods ORDER BY neighborhood_number', (err, rows) => {
+    res.status(200).type('json').send(rows); // Still need newline after each row
+  });
+});
+
+// Get /incidents
+app.get('/incidents', (req, res) => {
+  db.all('SELECT * FROM Incidents ORDER BY date_time', (err, rows) => {
+    res.status(200).type('json').send(rows); // Still need newline after each row
+  });
+});
+
+// Put /new-incident
+
+// Delete /remove-incident
+
+
+
+
+
+app.listen(port, () => {
+    console.log('Now listening on port ' + port);
+});
+
+// DISREGARD CODE BELOW, WAS FROM PREVIOUS ASSIGNMENT
 
 /*
 // GET request handler for '/year/*'
@@ -285,10 +313,6 @@ function capitalize(str) {
     }
 }
 */
-
-app.listen(port, () => {
-    console.log('Now listening on port ' + port);
-});
 
 /*
 // Transpose method from https://www.tutorialspoint.com/finding-transpose-of-a-2-d-array-javascript
