@@ -149,6 +149,18 @@ app.put('/new-incident', (req, res) =>{
 
 // Delete /remove-incident
 
+app.delete('/remove-incident', (req, res) =>{
+  console.log(req.body);
+  db.get('SELECT * FROM Incidents WHERE case_number = ?', [req.body.caseNumber], (err, row)=> {
+      if(err || row !== undefined ) {
+          res.status(500).type('txt').send('Error, could not insert incident');
+      } else {
+          db.run('DELETE FROM Incidents WHERE casse_number = ?',[req.body.caseNumber], (err) =>{
+              res.status(200).type('txt').send('deleted');
+          });
+      }
+  });
+});
 
 
 
