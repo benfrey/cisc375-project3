@@ -1,6 +1,8 @@
 // Built-in Node.js modules
 let fs = require('fs');
 let path = require('path');
+let cors = require('cors');
+
 
 // NPM modules
 let express = require('express');
@@ -12,6 +14,8 @@ let template_dir = path.join(__dirname, 'templates');
 let db_filename = path.join(__dirname, 'db', 'stpaul_crime.sqlite3');
 
 let app = express();
+app.use(express.json());
+app.use(cors());
 let port = 8000;
 
 // Open sqlite3 database
@@ -56,6 +60,19 @@ app.get('/incidents', (req, res) => {
 });
 
 // Put /new-incident
+
+app.put('/new-incident', (req, res) =>{
+    console.log(req.body);
+    db.get('SELECT * FROM Incidents WHERE case_number = ?', [req.body.caseNumber], (err, row)=> {
+        if(err || row !== undefined ) {
+            res.status(500).type('txt').send('Error, could not insert incident');
+        } else {
+            db.run('INSERT INTO Incidents (case_number, date_time, code, indicent, police_grid, neighborhood_number, block) VALUES(?, ?, ?, ?, ?, ?, ?)',[req.body.caseNumber, req.body.dateTime, req.body.code, req.body.incident, req.body.policeGrid, req.body.neighborhoodNumber, req.body.block], (err) =>{
+                res.status(200).type('txt').send('success');
+            });
+        }
+    });
+});
 
 // Delete /remove-incident
 
