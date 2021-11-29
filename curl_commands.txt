@@ -1,0 +1,24 @@
+Commands challenges:
+1. GET /codes => Return JSON array with list of codes and their corresponding incident type (ordered by code number)
+2. GET /neighborhoods => Return JSON object with list of neighborhood ids and their corresponding neighborhood name (ordered by ID)
+3. GET /incidents => Return JSON object with list of crime incidents (ordered by date/time)
+4. PUT /new-incident =>
+	a. Upload incident data to be inserted into the SQLite3 database
+	b. Data fields: case_number, date, time, code, incident, police_grid, neighborhood_number, block
+	c. Note: response should reject (status 500) if the case number already exists in the database
+5. DELETE /remove-incident =>
+	a. Remove data from SQLite3 database
+	b. Data fields: case_number
+	c. Note: response should reject (status 500) if the case number does not exist in the database  
+
+Commands to run:
+1. curl -X GET "http://localhost:8000/codes"
+2. curl -X GET "http://localhost:8000/neighborhoods"
+3. curl -X GET "http://localhost:8000/incidents"
+4. curl 
+5. curl
+
+Extra commands for specific cases:
+1. curl -X GET "http://localhost:8000/codes?code=110,700"
+2. curl -X GET "http://localhost:8000/neighborhoods?code=11,14"
+3. Curl
