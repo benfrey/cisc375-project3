@@ -44,9 +44,9 @@ Implement additional features to earn a B or A
 
     
     
-=================================testing curl commands (grant)=======================
-    curl -X GET "http://localhost:8000/incidents?end_date=2019-02-01&start_date=2019-01-01"
-    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01"
-    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954"
-    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954&neighborhood=10"
+    =================================testing curl commands (grant)======================= </br>
+    curl -X GET "http://localhost:8000/incidents?end_date=2019-02-01&start_date=2019-01-01" </br>
+    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01" </br>
+    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954" </br>
+    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954&neighborhood=10" </br>
     
