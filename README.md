@@ -49,4 +49,18 @@ Implement additional features to earn a B or A
     curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01" </br>
     curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954" </br>
     curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954&neighborhood=10" </br>
+    curl -X DELETE "http://localhost:8000/incidents?case_number=<number>"
+    
+    
+ {
+"case_number": "999999",
+"date_time": "2021-06-08T15:26:00.000",
+"code": 9954,
+"incident" : "Proactive Police Visit",
+"police_grid": 98,
+"neighborhood_number": 1,
+"block": "63X KENNARD ST"
+}
+send this in the body of a request in raw JSON format to http://localhost:8000/new-incident
+from this website https://www.webtools.services/online-rest-api-client
     
