@@ -18,7 +18,7 @@ app.use(cors());
 let port = 8000;
 
 // Open sqlite3 database
-let db = new sqlite3.Database(db_filename, sqlite3.OPEN_READONLY, (err) => {
+let db = new sqlite3.Database(db_filename, sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
         console.log('Error opening ' + db_filename);
     }
@@ -103,7 +103,9 @@ app.get('/neighborhoods', (req, res) => {
 app.get('/incidents', (req, res) => {
 
   // Initial part of sql query
-  sqlQuery = 'SELECT * FROM Incidents';
+  var sqlQuery = 'SELECT * FROM Incidents';
+
+  var params = [];
 
   // Specific query (logan and grant)
   //this case_number is not specifically needed, just using for testing purposes
@@ -136,22 +138,31 @@ app.get('/incidents', (req, res) => {
 
   if(req.query.start_date && req.query.end_date){
     if(req.query.code || req.query.grid || req.query.neighborhood){
-      sqlQuery += " AND date_time BETWEEN "+req.query.start_date+" and "+req.query.end_date;
+      sqlQuery += " AND date_time BETWEEN ? and ?";
+      params.push(req.query.start_date);
+      params.push(req.query.end_date);
     }else{
-      sqlQuery += " WHERE date_time BETWEEN "+req.query.start_date+" and "+req.query.end_date;
+      sqlQuery += " WHERE date_time BETWEEN ? and ?";
+      params.push(req.query.start_date);
+      params.push(req.query.end_date);
     }
   }else if(req.query.end_date){
     if(req.query.code || req.query.grid || req.query.neighborhood){
-      sqlQuery += " AND date_time <= "+req.query.end_date;
+      sqlQuery += " AND date_time <= ?";
+      params.push(req.query.end_date);
     }else{
-      sqlQuery += " WHERE date_time <= "+req.query.end_date;
+      sqlQuery += " WHERE date_time <= ?";
+      params.push(req.query.end_date);
     }
   }else if(req.query.start_date){
     if(req.query.code || req.query.grid || req.query.neighborhood){
-      sqlQuery += " AND date_time >= "+req.query.start_date;
+      sqlQuery += " AND date_time >= ?";
+      params.push(req.query.start_date);
     }else{
-      sqlQuery += " WHERE date_time >= "+req.query.start_date;
+      sqlQuery += " WHERE date_time >= ?" ;
+      params.push(req.query.start_date);
     }
+    
   }
     
   // End of sql query statement
@@ -167,7 +178,7 @@ app.get('/incidents', (req, res) => {
 
   // Make the database query
   new Promise( (resolve, reject) => {
-      db.all(sqlQuery, (err, rows) => {
+      db.all(sqlQuery, params, (err, rows) => {
           if (err) {
               console.log(err); // error somewhere, cannot resolve promise
               reject();
@@ -191,8 +202,13 @@ app.put('/new-incident', (req, res) =>{
         if(err || row !== undefined ) {
             res.status(500).type('txt').send('Error, could not insert incident');
         } else {
-            db.run('INSERT INTO Incidents (case_number, date_time, code, indicent, police_grid, neighborhood_number, block) VALUES(?, ?, ?, ?, ?, ?, ?)',[req.body.case_number, req.body.date_time, req.body.code, req.body.incident, req.body.police_grid, req.body.neighborhoood_number, req.body.block], (err) =>{
+            db.run('INSERT INTO Incidents (case_number, date_time, code, incident, police_grid, neighborhood_number, block) VALUES(?, ?, ?, ?, ?, ?, ?)',[req.body.case_number, req.body.date_time, req.body.code, req.body.incident, req.body.police_grid, req.body.neighborhoood_number, req.body.block], (err) =>{
+              if(err){
+                console.log(err);
+                res.status(500).type('txt').send('Error, could not insert incident');
+              }else{
                 res.status(200).type('txt').send('success');
+              }
             });
         }
     });
