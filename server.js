@@ -197,7 +197,6 @@ app.get('/incidents', (req, res) => {
 // Put /new-incident
 
 app.put('/new-incident', (req, res) =>{
-    console.log(req.body);
     db.get('SELECT * FROM Incidents WHERE case_number = ?', [req.body.case_number], (err, row)=> {
         if(err || row !== undefined ) {
             res.status(500).type('txt').send('Error, could not insert incident');
@@ -215,19 +214,39 @@ app.put('/new-incident', (req, res) =>{
 });
 
 // Delete /remove-incident
-
 app.delete('/remove-incident', (req, res) =>{
-  console.log(req.body);
-  db.get('SELECT * FROM Incidents WHERE case_number = ?', [req.body.caseNumber], (err, row)=> {
-      if(err || row !== undefined ) {
-          res.status(500).type('txt').send('Error, could not insert incident');
+  db.get('SELECT * FROM Incidents WHERE case_number = ?', [req.query.case_number], (err, row)=> {
+      if(err || row === undefined ) {
+          res.status(500).type('txt').send('Error, incident does not exist');
       } else {
-          db.run('DELETE FROM Incidents WHERE casse_number = ?',[req.body.caseNumber], (err) =>{
-              res.status(200).type('txt').send('deleted');
+          db.run('DELETE FROM Incidents WHERE case_number = ?',[req.query.case_number], (err) =>{
+            if(err){
+              console.log(err);
+              res.status(500).type('txt').send('Error, could not delete');
+            }else{
+              res.status(200).type('txt').send('Entry Deleted');
+            }
           });
       }
   });
 });
+// app.delete('/remove-incident', (req, res) =>{
+//   console.log(req.body);
+//   db.get('SELECT * FROM Incidents WHERE case_number = ?', [req.body.case_number], (err, row)=> {
+//       if(err || row !== undefined ) {
+//           res.status(500).type('txt').send('Error, incident does not exist');
+//       } else {
+//           db.run('DELETE FROM Incidents WHERE case_number = ?',[req.body.case_number], (err) =>{
+//             if(err){
+//               console.log(err);
+//               res.status(500).type('txt').send('internal server error, could not be deleted');
+//             }else{
+//               res.status(200).type('txt').send('deleted');
+//             }
+//           });
+//       }
+//   });
+// });
 
 
 
