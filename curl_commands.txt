@@ -32,5 +32,5 @@ Commands to run:
 "neighborhood_number": 1,
 "block": "63X KENNARD ST"
 }
-    </br>   
+
 Send this in the body of a request in raw JSON format to http://localhost:8000/new-incident from this website https://www.webtools.services/online-rest-api-client
