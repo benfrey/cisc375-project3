@@ -12,13 +12,25 @@ Commands challenges:
 	c. Note: response should reject (status 500) if the case number does not exist in the database  
 
 Commands to run:
-1. curl -X GET "http://localhost:8000/codes"
-2. curl -X GET "http://localhost:8000/neighborhoods"
-3. curl -X GET "http://localhost:8000/incidents"
-4. curl 
-5. curl
+- $curl -X GET "http://localhost:8000/codes"
+- $curl -X GET "http://localhost:8000/codes?code=110,700"
+- $curl -X GET "http://localhost:8000/neighborhoods"
+- $curl -X GET "http://localhost:8000/neighborhoods?code=11,14"
+- $curl -X GET "http://localhost:8000/incidents"
+- $curl -X GET "http://localhost:8000/incidents?end_date=2019-02-01&start_date=2019-01-01"
+- $curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01"
+- $curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954"
+- $curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954&neighborhood=10"
+- $curl -X DELETE "http://localhost:8000/incidents?case_number=<number>"
 
-Extra commands for specific cases:
-1. curl -X GET "http://localhost:8000/codes?code=110,700"
-2. curl -X GET "http://localhost:8000/neighborhoods?code=11,14"
-3. Curl
+{
+"case_number": "999999",
+"date_time": "2021-06-08T15:26:00.000",
+"code": 9954,
+"incident" : "Proactive Police Visit",
+"police_grid": 98,
+"neighborhood_number": 1,
+"block": "63X KENNARD ST"
+}
+    </br>   
+Send this in the body of a request in raw JSON format to http://localhost:8000/new-incident from this website https://www.webtools.services/online-rest-api-client
