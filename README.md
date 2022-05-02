@@ -3,6 +3,10 @@
 ## Project Description
 
 The main purpose of this project is to demonstrate the implementation of a RESTful API Server that can access information stored on a database within this repository. The SQL database contains St. Paul crime data over the last few years and can be accessed via cURL HTTP requests when the API server is hosted locally. To setup the server, please see the "Installation Process" section.
+</br></br>
+This project relates directly to my CISC 480: Senior Capstone course because it served as the launching point for creating the Database Team's Classy Schedule API Server. Using Node JS, NPM, and other modules to add additional functionality (e.x. login, hashing, tokens...) the Database Team was able to host an Express-based RESTful API Server on an Azure Web App. The API interfaces with the Website Development team, as well as the Desktop Development team.
+</br></br>
+NOTE: All code in this repository has been cleaned up since the completion of this course to be featured in my senior portfolio. Additional documentation has been provided under "/docs" for future usage.
 
 ## Project Overview
 
