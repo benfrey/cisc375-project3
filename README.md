@@ -1,13 +1,28 @@
-# RESTful Server - CISC375: Web Development Project #3
+# RESTful API Server - CISC375: Web Development Project #3
 
-1. $git clone https://github.com/<user>/<project>
-2. $cd <project>
-3. Copy my local version of 'stpaul_crime.sqlite3' to the 'db' folder
-4. $npm install
-5. $node server.js
-6. Perform GET, PUT, DELETE requests using curl
+## Project Description
 
-# Project components
+The main purpose of this project is to demonstrate the implementation of a RESTful API Server that can access information stored on a database within this repository. The SQL database contains St. Paul crime data over the last few years and can be accessed via cURL HTTP requests when the API server is hosted locally. To setup the server, please see the "Installation Process" section.
+
+## Project Overview
+
+Project Assignment Outline PDF: [project_assignment.pdf](/docs/project_assignment.pdf) </br>
+cURL Example Requests: [curl_commands.txt](/docs/curl_commands.txt) </br>
+
+### Installation Process
+1. $git clone https://github.com/benfrey/cisc375-project3
+2. $cd cisc375-project3
+3. $npm install
+4. $node server.js
+5. Perform GET, PUT, DELETE requests using cURL
+
+### Example API Usage
+Server Activation
+![Server Activation with Terminal](/docs/server_activation.png?raw=true "Server Activation with Terminal")
+Example API Command
+![Example API Usage with Terminal](/docs/example_usage.png?raw=true "Example API Usage")
+
+# Project Components
 Implement the following to earn 30/40 points (grade: C)
 - Package.json **(Ben)**
     - Fill out the author and contributors sections in package.json (author should be whoever's GitHub account is used to host the code, contributors should be all group members)
@@ -41,28 +56,3 @@ Implement additional features to earn a B or A
     - grid - comma separated list of police grid numbers to include in result (e.g. ?grid=38,65). By default all police grids should be included.
     - neighborhood - comma separated list of neighborhood numbers to include in result (e.g. ?neighborhood=11,14). By default all neighborhoods should be included.
     - limit - maximum number of incidents to include in result (e.g. ?limit=50). By default the limit should be 1,000. Result should include the N most recent incidents (within specified date range).
-
-    
-    
-    =================================testing curl commands (grant)======================= </br>
-    curl -X GET "http://localhost:8000/incidents?end_date=2019-02-01&start_date=2019-01-01" </br>
-    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01" </br>
-    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954" </br>
-    curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954&neighborhood=10" </br>
-    curl -X DELETE "http://localhost:8000/incidents?case_number=<number>"
-    
-    
- {
-"case_number": "999999",
-"date_time": "2021-06-08T15:26:00.000",
-"code": 9954,
-"incident" : "Proactive Police Visit",
-"police_grid": 98,
-"neighborhood_number": 1,
-"block": "63X KENNARD ST"
-}
-    
-    
-send this in the body of a request in raw JSON format to http://localhost:8000/new-incident
-from this website https://www.webtools.services/online-rest-api-client
-    

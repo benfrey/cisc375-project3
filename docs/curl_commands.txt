@@ -21,7 +21,7 @@ Commands to run:
 - $curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01"
 - $curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954"
 - $curl -X GET "http://localhost:8000/incidents?limit=4&end_date=2019-02-01&start_date=2019-01-01&code=9954&neighborhood=10"
-- $curl -X DELETE "http://localhost:8000/incidents?case_number=<number>"
+- $curl -X DELETE "http://localhost:8000/remove-incident?case_number=<number>"
 
 {
 "case_number": "999999",

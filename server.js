@@ -1,8 +1,17 @@
+// Authors: Ben Frey, Grant Toegnes, Logan Schaffer
+// Professor: Dr. Marrinan
+// Course: CISC 375: Web Development
+// Date: 220501
+// Description: The main purpose of this project is to demonstrate the implementation of a
+// RESTful API Server that can access information stored on a database within this repository.
+// The SQL database contains St. Paul crime data over the last few years and can be accessed
+// via cURL HTTP requests when the API server is hosted locally. To setup the server, please
+// see the "Installation Process" section.
+
 // Built-in Node.js modules
 let fs = require('fs');
 let path = require('path');
 let cors = require('cors');
-
 
 // NPM modules
 let express = require('express');
@@ -12,6 +21,7 @@ let public_dir = path.join(__dirname, 'public');
 let template_dir = path.join(__dirname, 'templates');
 let db_filename = path.join(__dirname, 'db', 'stpaul_crime.sqlite3');
 
+// Setup APP (API Server) on port 8000
 let app = express();
 app.use(express.json());
 app.use(cors());
@@ -162,9 +172,9 @@ app.get('/incidents', (req, res) => {
       sqlQuery += " WHERE date_time >= ?" ;
       params.push(req.query.start_date);
     }
-    
+
   }
-    
+
   // End of sql query statement
   sqlQuery += " ORDER BY date_time";
 
@@ -195,7 +205,6 @@ app.get('/incidents', (req, res) => {
 });
 
 // Put /new-incident
-
 app.put('/new-incident', (req, res) =>{
     db.get('SELECT * FROM Incidents WHERE case_number = ?', [req.body.case_number], (err, row)=> {
         if(err || row !== undefined ) {
@@ -230,26 +239,6 @@ app.delete('/remove-incident', (req, res) =>{
       }
   });
 });
-// app.delete('/remove-incident', (req, res) =>{
-//   console.log(req.body);
-//   db.get('SELECT * FROM Incidents WHERE case_number = ?', [req.body.case_number], (err, row)=> {
-//       if(err || row !== undefined ) {
-//           res.status(500).type('txt').send('Error, incident does not exist');
-//       } else {
-//           db.run('DELETE FROM Incidents WHERE case_number = ?',[req.body.case_number], (err) =>{
-//             if(err){
-//               console.log(err);
-//               res.status(500).type('txt').send('internal server error, could not be deleted');
-//             }else{
-//               res.status(200).type('txt').send('deleted');
-//             }
-//           });
-//       }
-//   });
-// });
-
-
-
 
 app.listen(port, () => {
     console.log('Now listening on port ' + port);
