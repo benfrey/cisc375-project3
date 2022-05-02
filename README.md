@@ -1,4 +1,4 @@
-# RESTful API Server - CISC375: Web Development Project #3
+# RESTful API - CISC375: Web Development Project #3
 
 ## Project Description
 
